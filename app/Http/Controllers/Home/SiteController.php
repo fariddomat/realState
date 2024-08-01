@@ -3,100 +3,95 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
 use App\Models\Category;
-use App\Models\Course;
+use App\Models\Property;
+use App\Models\Favorite;
+use App\Models\Comment;
+use App\Models\Order;
 use App\Models\Contact;
-use App\Models\Lesson;
-use App\Models\Schedule;
-use App\Models\Train;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public function index()
+    public function home()
     {
-        $courses = Course::limit(6)->get();
-        $teachers = User::role('teacher')->get();
-        $latestCourses=Course::latest()->limit(3)->get();
-
-        return view('welcome', compact('courses', 'teachers', 'latestCourses'));
-    }
-
-    public function courses(Request $request)
-    {
-        if ($request->category!='') {
-
-            $courses = Course::where('category_id', $request->category)->get();
-        }else{
-
-        $courses = Course::all();
-        }
         $categories = Category::all();
-        $latestCourses=Course::latest()->limit(3)->get();
-
-        return view('home.courses', compact('courses', 'latestCourses', 'categories'));
+        $properties = Property::latest()->take(6)->get(); // Example: show latest 6 properties
+        return view('site.home', compact('categories', 'properties'));
     }
 
-    public function course($id)
+    public function categories()
     {
-        $course = Course::findOrFail($id);
-        return view('home.course', compact('course'));
+        $categories = Category::all();
+        return view('site.categories', compact('categories'));
     }
 
-    public function blogs()
+    public function properties(Category $category)
     {
-        $blogs = Blog::latest()->get();
-
-        return view('home.blogs', compact('blogs'));
+        $properties = $category->properties()->paginate(10);
+        return view('site.properties', compact('category', 'properties'));
     }
 
-    public function blog($id)
+    public function property(Property $property)
     {
-        $blog = Blog::findOrFail($id);
-        return view('home.blog', compact('blog'));
+        $comments = $property->comments()->latest()->get();
+        return view('site.property', compact('property', 'comments'));
     }
 
-
-    public function lesson($id)
+    public function order(Request $request, Property $property)
     {
-        $lesson = Lesson::findOrFail($id);
-        return view('home.lesson', compact('lesson'));
+        $order = new Order();
+        $order->user_id = auth()->id();
+        $order->property_id = $property->id;
+        $order->save();
+
+        return redirect()->route('property', $property)->with('success', 'Order placed successfully');
     }
 
-    public function quiz($id)
+    public function addToFavorite(Property $property)
     {
-        $lesson = Lesson::findOrFail($id);
-        $quizzes=$lesson->quizzes;
-        return view('home.quiz', compact('lesson', 'quizzes'));
+        $favorite = new Favorite();
+        $favorite->user_id = auth()->id();
+        $favorite->property_id = $property->id;
+        $favorite->save();
+
+        return redirect()->route('property', $property)->with('success', 'Property added to favorites');
     }
 
-
-
-    public function about()
+    public function comment(Request $request, Property $property)
     {
-        $teachers = User::role('teacher')->get();
-        return view('home.about',compact('teachers'));
+        $request->validate([
+            'comment' => 'required|string|max:500',
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = auth()->id();
+        $comment->property_id = $property->id;
+        $comment->content = $request->comment;
+        $comment->save();
+
+        return redirect()->route('property', $property)->with('success', 'Comment added successfully');
     }
 
     public function contact()
     {
-        return view('home.contact-us');
+        return view('site.contact');
     }
 
-    public function postContact(Request $request)
+    public function sendContact(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'message'=>'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:1000',
         ]);
-        Contact::create($request->all());
-        return redirect()->route('home');
 
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+        $contact->save();
+
+        return redirect()->route('contact')->with('success', 'Message sent successfully');
     }
-
-
-
 }

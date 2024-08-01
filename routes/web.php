@@ -31,27 +31,25 @@ Route::post('/pusher/auth', function () {
     return Auth::user();
 });
 
-Route::get('/', [SiteController::class, 'index'])->name('home');
-Route::get('/courses', [SiteController::class, 'courses'])->name('courses');
-Route::get('/courses/{id}', [SiteController::class, 'course'])->name('courses.show');
-Route::get('/lessons/{id}', [SiteController::class, 'lesson'])->name('lessons.show');
-Route::get('/lessons/{id}/quiz', [SiteController::class, 'quiz'])->name('lessons.quiz');
+Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/categories', [SiteController::class, 'categories'])->name('categories');
+Route::get('/categories/{category}', [SiteController::class, 'properties'])->name('properties');
+Route::get('/property/{property}', [SiteController::class, 'property'])->name('property');
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+Route::post('/contact', [SiteController::class, 'sendContact'])->name('sendContact');
+
 
 Route::get('/about', [SiteController::class, 'about'])->name('about');
-Route::get('/contact-us', [SiteController::class, 'contact'])->name('contact');
-Route::post('/postContact', [SiteController::class, 'postContact'])->name('postContact');
 
-
-Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
-Route::get('/blogs/{id}', [SiteController::class, 'blog'])->name('blogs.show');
 
 // Ensure that the user is authenticated for these routes
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('favorites', [StudentController::class, 'favorite'])->name('favorites.store');
-    Route::delete('favorites', [StudentController::class, 'destroyfavorite'])->name('favorites.destroy');
-    Route::post('comments', [StudentController::class, 'comment'])->name('comments.store');
-  });
+
+    Route::post('/property/{property}/order', [SiteController::class, 'order'])->name('order');
+    Route::post('/property/{property}/favorite', [SiteController::class, 'addToFavorite'])->name('addToFavorite');
+    Route::post('/property/{property}/comment', [SiteController::class, 'comment'])->name('comment');
+});
 
 Route::middleware('auth')->group(function () {
 

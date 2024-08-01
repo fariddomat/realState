@@ -30,7 +30,8 @@
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard.statistics.index' ? ' active bg-gradient-primary' : '' }}"
                     href="{{ route('dashboard.statistics.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1.2rem;" class="fas fa-square ps-2 pe-2 text-center"></i>
+
+                        <i class="material-icons opacity-10">book</i>
                     </div>
                     <span class="nav-link-text ms-1">Statistics</span>
                 </a>
@@ -39,7 +40,8 @@
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard.users.index' ? ' active bg-gradient-primary' : '' }}"
                         href="{{ route('dashboard.users.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
+
+                            <i class="material-icons opacity-10">person</i>
                         </div>
                         <span class="nav-link-text ms-1">Users</span>
                     </a>
@@ -49,7 +51,8 @@
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard.favorites.index' ? ' active bg-gradient-primary' : '' }}"
                     href="{{ route('dashboard.favorites.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1.2rem;" class="fas fa-heart ps-2 pe-2 text-center"></i>
+
+                        <i class="material-icons opacity-10">bookmark</i>
                     </div>
                     <span class="nav-link-text ms-1">Favorites</span>
                 </a>
