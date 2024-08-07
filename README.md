@@ -1,4 +1,4 @@
-"# realState" 
+"# realestate" 
 
 Users
     controller #
@@ -28,7 +28,7 @@ Favorite
 site.blade.php
 home search
     properties #
-    owners
+    owners #
 
 categories # 
 properties #
