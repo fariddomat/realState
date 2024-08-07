@@ -11,6 +11,6 @@ class PropertyImage extends Model
     protected $guarded=[];
 
     public function prpoerty(){
-        return $this->belongTo(Property::class);
+        return $this->belongsTo(Property::class);
     }
 }

@@ -25,6 +25,12 @@ Favorite
     model #
     view #
 
+Order  
+    controller #
+    model #
+    view #
+    user
+
 site.blade.php
 home search
     properties #

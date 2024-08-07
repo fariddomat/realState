@@ -4,6 +4,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Dashboard\FavoriteController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Home\QuizController;
@@ -77,12 +78,17 @@ Route::middleware(['role:admin'])->prefix('dashboard')->name('dashboard.')->grou
     Route::resource('users', Dashboard\UserController::class);
     Route::get('/contact', [Dashboard\HomeController::class, 'contact'])->name('contact');
 });
-// teacher
-Route::middleware(['role:admin||moderator|teacher'])->prefix('dashboard')->name('dashboard.')->group(function () {
+// owner
+Route::middleware(['role:admin||moderator|owner'])->prefix('dashboard')->name('dashboard.')->group(function () {
     // Routes accessible to admins and coach
 
     Route::resource('properties', Dashboard\PropertyController::class);
     Route::resource('properties/{property}/image', Dashboard\PropertyImageController::class)->except(['show', 'edit', 'update']);
+
+    Route::get('/orders/admin', [OrderController::class, 'indexAdmin'])->name('orders.admin');
+Route::get('/orders/owner', [OrderController::class, 'indexOwner'])->name('orders.owner');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
 
     Route::resource('comments', Dashboard\CommentController::class);
 

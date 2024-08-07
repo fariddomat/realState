@@ -16,7 +16,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('proprty_id');
-            $table->string('message')->nullable();
+            $table->text('message')->nullable();
+            $table->string('status')->default('pending');
+            $table->text('reply')->nullable();
             $table->timestamps();
 
         });
