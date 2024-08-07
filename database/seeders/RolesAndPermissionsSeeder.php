@@ -20,7 +20,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'delete_users',
             'view_users',
         ];
-        
+
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
@@ -30,7 +30,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         Role::create(['name' => 'moderator']);
-        Role::create(['name' => 'teacher']);
+        Role::create(['name' => 'owner']);
         Role::create(['name' => 'user']);
     }
 }

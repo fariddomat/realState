@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('direction');
             $table->string('address');
             $table->string('status');
+            $table->string('type'); // آجار، شراء
             $table->integer('user_id');
             $table->integer('category_id');
             $table->timestamps();

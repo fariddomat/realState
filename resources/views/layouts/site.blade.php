@@ -27,13 +27,14 @@
 
     <!-- css file -->
     <link rel="stylesheet" href="{{ asset('home/assets/css files/style.css') }}" />
+    @yield('styles')
   </head>
   <body>
     <header>
       <nav class="navbar flex">
         <div class="logo flex">
           <div class="navbar-img">
-            <img src="./assets/images/logo.png" alt="logo" />
+            <img src="{{ asset('home/assets/images/logo.png') }}" alt="logo" />
           </div>
           <h3 class="flex">
             <span> الوساطة العقارية </span>
@@ -42,15 +43,19 @@
         </div>
 
         <ul class="navbar-items flex">
-          <li><a class="item-active" href="#home">الرئيسية</a></li>
-          <li><a href="#services">الخدمات</a></li>
+          <li><a class="item-active" href="{{ route('home') }}">الرئيسية</a></li>
+          <li><a href="{{ route('categories') }}">العقارات</a></li>
           <li><a href="#team">من نحن ؟</a></li>
           <li><a href="#contact">تواصل معنا </a></li>
         </ul>
         <div class="account">
-          <a href="#">
+          <a href="{{ route('login') }}">
             <i class="fa-regular fa-user"></i>
-            تسجيل /انشاء
+           @auth
+                لوحة التحكم
+               @else
+               تسجيل الدخول
+           @endauth
           </a>
         </div>
       </nav>
@@ -64,7 +69,7 @@
       <div class="footer-content flex container">
         <div class="logo flex">
           <div class="footer-img">
-            <img src="./assets/images/logo.png" alt="logo" />
+            <img src="{{ asset('home/assets/images/logo.png') }}" alt="logo" />
           </div>
           <h3 class="flex">
             <span> الوساطة العقارية </span>

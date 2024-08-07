@@ -15,7 +15,8 @@
     />
 </head>
 <body>
-    <div class="page"> <form action="{{ route('login') }}" method="POST" class="log" style="text-align: center">
+    <div class="page">
+    <form action="{{ route('login') }}" method="POST" class="log" style="text-align: center">
         @csrf
             <h2>login</h2>
             <div class="email">
@@ -30,7 +31,7 @@
             <a href="" class="link">انشاء حساب</a>
         </form>
 
-        <form class="sign" action="">
+        <form class="sign" action=""  style="text-align: center">
             <h2>sign</h2>
             <div class="email">
                 <input type="text" name="" id="" required>

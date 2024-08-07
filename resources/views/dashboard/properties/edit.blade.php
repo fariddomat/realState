@@ -69,6 +69,16 @@
                                 <p class='text-danger inputerror'>{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="type">Type</label>
+                            <select name="type" class="form-control border border-2 p-2">
+                               <option value="آجار" >آجار</option>
+                               <option value="بيع" @if ($property->type =='بيع')
+                                selected
+                               @endif>بيع</option>
+                            </select>
+                        </div>
+
 
                         <div class="mb-3 col-md-6">
                             <label for="user_id">User</label>
@@ -101,7 +111,7 @@
 
 
                         <div class="mb-3 col-md-6">
-                            <img src="{{ asset($category->img) }}" style="max-width: 150px" alt="">
+                            <img src="{{ asset($property->img) }}" style="max-width: 150px" alt="">
                         </div>
                     </div>
                     <button type="submit" class="btn bg-gradient-dark">Update</button>

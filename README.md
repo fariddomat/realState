@@ -24,3 +24,18 @@ Favorite
     Controller #
     model #
     view #
+
+site.blade.php
+home search
+    properties #
+    owners
+
+categories # 
+properties #
+
+property 
+    Details #
+    image #
+    comments #
+    favorite #
+    order #

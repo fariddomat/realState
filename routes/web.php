@@ -46,7 +46,11 @@ Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::middleware(['auth'])->group(function () {
 
 
-    Route::post('/property/{property}/order', [SiteController::class, 'order'])->name('order');
+
+    Route::get('/property/{property}/order', [SiteController::class, 'orderForm'])->name('order.form');
+    Route::post('/property/{property}/order', [SiteController::class, 'processOrder'])->name('order.process');
+    Route::get('/checkout', [SiteController::class, 'checkout'])->name('checkout');
+
     Route::post('/property/{property}/favorite', [SiteController::class, 'addToFavorite'])->name('addToFavorite');
     Route::post('/property/{property}/comment', [SiteController::class, 'comment'])->name('comment');
 });

@@ -46,6 +46,7 @@ class PropertyController extends Controller
             'direction' =>  'required',
             'address' =>  'required',
             'status' =>  'required',
+            'type' =>  'required',
             'user_id' =>  'required',
             'category_id' =>  'required',
             'img' => 'required|image'
@@ -54,7 +55,7 @@ class PropertyController extends Controller
             $image = $request->file('img');
             $directory = '/uploads/categroies'; // Replace with the desired directory
             $helper = new ImageHelper;
-            $fullPath = $helper->storeImageInPublicDirectory($image, $directory);
+            $fullPath = $helper->storeImageInPublicDirectory($image, $directory, 600, 400);
             // Save the full path with name in the database
             $imagePath = $fullPath;
         }
@@ -107,15 +108,16 @@ class PropertyController extends Controller
             'direction' =>  'required',
             'address' =>  'required',
             'status' =>  'required',
+            'type' =>  'required',
             'user_id' =>  'required',
             'category_id' =>  'required',
-            'img' => 'required|image'
+            'img' => 'nullable|image'
         ]);
         if ($request->has('img')) {
             $image = $request->file('img');
             $directory = '/uploads/property'; // Replace with the desired directory
             $helper = new ImageHelper;
-            $fullPath = $helper->storeImageInPublicDirectory($image, $directory);
+            $fullPath = $helper->storeImageInPublicDirectory($image, $directory, 600, 400);
             // Save the full path with name in the database
             $imagePath = $fullPath;
             $property->img=$imagePath;

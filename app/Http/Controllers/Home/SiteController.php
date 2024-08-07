@@ -9,6 +9,7 @@ use App\Models\Favorite;
 use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -17,7 +18,8 @@ class SiteController extends Controller
     {
         $categories = Category::all();
         $properties = Property::latest()->take(6)->get(); // Example: show latest 6 properties
-        return view('site.home', compact('categories', 'properties'));
+        $owners=User::Role('owner')->get();
+        return view('site.home', compact('categories', 'properties', 'owners'));
     }
 
     public function categories()
@@ -35,17 +37,32 @@ class SiteController extends Controller
     public function property(Property $property)
     {
         $comments = $property->comments()->latest()->get();
-        return view('site.property', compact('property', 'comments'));
+        $propertyImages = $property->property_images; // Assuming
+        $user = auth()->user();
+        $isFavorite = $user ? $user->favorites()->where('property_id', $property->id)->exists() : false;
+        return view('site.property', compact('property', 'comments', 'propertyImages', 'user', 'isFavorite'));
+
     }
 
-    public function order(Request $request, Property $property)
+    public function orderForm(Property $property)
+    {
+        $user = auth()->user();
+        return view('site.order', compact('property', 'user'));
+    }
+
+    public function processOrder(Request $request, Property $property)
     {
         $order = new Order();
         $order->user_id = auth()->id();
-        $order->property_id = $property->id;
+        $order->proprty_id = $property->id;
         $order->save();
 
-        return redirect()->route('property', $property)->with('success', 'Order placed successfully');
+        return redirect()->route('checkout')->with('success', 'Order placed successfully');
+    }
+
+    public function checkout()
+    {
+        return view('site.checkout');
     }
 
     public function addToFavorite(Property $property)
@@ -67,7 +84,7 @@ class SiteController extends Controller
         $comment = new Comment();
         $comment->user_id = auth()->id();
         $comment->property_id = $property->id;
-        $comment->content = $request->comment;
+        $comment->comment = $request->comment;
         $comment->save();
 
         return redirect()->route('property', $property)->with('success', 'Comment added successfully');

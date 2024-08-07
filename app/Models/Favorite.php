@@ -11,10 +11,10 @@ class favorite extends Model
     protected $guarded = [];
     public function user()
     {
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
     public function property()
     {
-        return $this->belongTo(Property::class);
+        return $this->belongsTo(Property::class);
     }
 }

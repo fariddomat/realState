@@ -38,9 +38,9 @@ class CategoryController extends Controller
         ]);
         if ($request->has('img')) {
             $image = $request->file('img');
-            $directory = '/uploads/categroies'; // Replace with the desired directory
+            $directory = '/uploads/categories'; // Replace with the desired directory
             $helper = new ImageHelper;
-            $fullPath = $helper->storeImageInPublicDirectory($image, $directory);
+            $fullPath = $helper->storeImageInPublicDirectory($image, $directory, 600, 400);
             // Save the full path with name in the database
             $imagePath = $fullPath;
         }
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             $image = $request->file('img');
             $directory = '/uploads/categories'; // Replace with the desired directory
             $helper = new ImageHelper;
-            $fullPath = $helper->storeImageInPublicDirectory($image, $directory);
+            $fullPath = $helper->storeImageInPublicDirectory($image, $directory, 600, 400);
             // Save the full path with name in the database
             $imagePath = $fullPath;
             $category->img = $imagePath;
