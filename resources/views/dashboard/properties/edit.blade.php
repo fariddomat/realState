@@ -63,8 +63,28 @@
                         </div>
 
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Status</label>
-                            <input name="status" type="text" class="form-control border border-2 p-2" value="{{ old('status', $property->status) }}">
+                            <label class="form-label">Status : {{ $property->status }}</label>
+                            <select name="status" class="form-control border border-2 p-2">
+                                @if (auth()->user()->hasRole('owner'))
+                                <option value="">..</option>
+                                <option value="pending" @if ($property->status == 'pending')
+                                    selected
+                                @endif>بانتاظر الموافقة</option>
+                                <option value="closed" @if ($property->status == 'closed')
+                                    selected
+                                @endif>مغلق</option>
+                                @else
+                                <option value="available" @if ($property->status == 'available')
+                                    selected
+                                @endif>متاح</option>
+                                <option value="pending" @if ($property->status == 'pending')
+                                    selected
+                                @endif>بانتاظر الموافقة</option>
+                                <option value="closed" @if ($property->status == 'closed')
+                                    selected
+                                @endif>مغلق</option>
+                                @endif
+                             </select>
                             @error('status')
                                 <p class='text-danger inputerror'>{{ $message }}</p>
                             @enderror

@@ -63,7 +63,16 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Status</label>
-                            <input name="status" type="text" class="form-control border border-2 p-2" value="{{ old('status') }}">
+                            <select name="status" class="form-control border border-2 p-2">
+                                @if (auth()->user()->hasRole('owner'))
+                                <option value="pending">بانتاظر الموافقة</option>
+                                <option value="closed">مغلق</option>
+                                @else
+                                <option value="available">متاح</option>
+                                <option value="pending">بانتاظر الموافقة</option>
+                                <option value="closed">مغلق</option>
+                                @endif
+                             </select>
                             @error('status')
                                 <p class='text-danger inputerror'>{{ $message }}</p>
                             @enderror
