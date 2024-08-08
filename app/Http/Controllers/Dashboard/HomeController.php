@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Course;
+use App\Models\order;
+use App\Models\Property;
 use App\Models\Train;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,16 +22,14 @@ class HomeController extends Controller
 
     public function statistics()
     {
-        // Get the number of students enrolled in each course
-        $courseStudentCounts = Course::withCount('students')->get();
+        $totalUsers = User::count();
+        $totalProperties = Property::count();
+        $totalOrders = order::count();
+        $activeUsers = User::where('status', 'active')->count();
+        $inactiveUsers = User::where('status', 'inactive')->count();
 
-        // Get the number of courses each student is enrolled in
-        $studentCourseCounts = User::role('user')->withCount('studentCourses')->get();
 
-        // Get the number of lessons each teacher has created
-        $teacherLessonsCounts = User::role('teacher')->withCount('lessons')->get();
-
-        return view('dashboard.statistics.index', compact('courseStudentCounts', 'studentCourseCounts', 'teacherLessonsCounts'));
+        return view('dashboard.statistics.index', compact('totalUsers', 'totalProperties', 'totalOrders', 'activeUsers', 'inactiveUsers'));
     }
 
 }

@@ -58,8 +58,8 @@
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->id }}</td>
-                                                <td>{{ $order->property->name }}</td>
-                                                <td>{{ $order->user->name }}</td>
+                                                <td>{{ $order->property?->name }}</td>
+                                                <td>{{ $order->user?->name }}</td>
                                                 <td>{{ $order->status }}</td>
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>

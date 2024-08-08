@@ -51,7 +51,7 @@ class PropertyImageController extends Controller
             'img' => $imagePath,
         ]);
 
-        return redirect()->route('dashboard.images.index', $property);
+        return redirect()->route('dashboard.image.index', $property);
     }
 
     /**
@@ -64,6 +64,6 @@ class PropertyImageController extends Controller
         Storage::delete($propertyImage->path);
         // Delete the database record
         $propertyImage->delete();
-        return redirect()->route('dashboard.images.index', $property);
+        return redirect()->route('dashboard.image.index', $property);
     }
 }
