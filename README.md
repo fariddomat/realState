@@ -61,5 +61,5 @@ contact #
 check preivelgies #
 add images #
 statistics #
-approve accounts (adimn) # and properties (admin and moderators) #
+approve accounts (admin) # and properties (admin and moderators) #
 
