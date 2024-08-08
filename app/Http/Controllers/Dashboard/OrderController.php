@@ -26,6 +26,16 @@ class OrderController extends Controller
         return view('dashboard.orders.index', compact('orders'));
     }
 
+    public function indexUser()
+    {
+        $orders = Order::with('property', 'user')
+                    ->whereHas('user', function($query) {
+                        $query->where('id', auth()->id());
+                    })->get();
+        return view('dashboard.orders.index', compact('orders'));
+    }
+
+
     // عرض تفاصيل الطلب
     public function show($id)
     {

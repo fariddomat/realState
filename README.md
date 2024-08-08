@@ -29,7 +29,7 @@ Order
     controller #
     model #
     view #
-    user
+    user #
 
 site.blade.php
 home search
@@ -45,3 +45,5 @@ property
     comments #
     favorite #
     order #
+
+contact #

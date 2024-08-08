@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::delete('favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+    Route::get('/orders/user', [OrderController::class, 'indexUser'])->name('orders.user');
 
     // suggestion
 });
@@ -86,7 +87,7 @@ Route::middleware(['role:admin||moderator|owner'])->prefix('dashboard')->name('d
     Route::resource('properties/{property}/image', Dashboard\PropertyImageController::class)->except(['show', 'edit', 'update']);
 
     Route::get('/orders/admin', [OrderController::class, 'indexAdmin'])->name('orders.admin');
-Route::get('/orders/owner', [OrderController::class, 'indexOwner'])->name('orders.owner');
+    Route::get('/orders/owner', [OrderController::class, 'indexOwner'])->name('orders.owner');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
 
@@ -106,6 +107,12 @@ Route::middleware(['role:admin||moderator'])->prefix('dashboard')->name('dashboa
 
     Route::get('/imageGallery/browser', [Dashboard\ImageGalleryController::class, 'browser'])->name('imageGallery.browser');
     Route::post('/imageGallery/uploader', [Dashboard\ImageGalleryController::class, 'uploader'])->name('imageGallery.uploader');
+});
+
+Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+
+    // suggestion
 });
 
 require __DIR__ . '/auth.php';

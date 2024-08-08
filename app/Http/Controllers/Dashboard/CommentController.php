@@ -11,12 +11,12 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::all();
-        return view('dashboard.lessons.comments.index', compact('comments'));
+        return view('dashboard.properties.comments.index', compact('comments'));
     }
 
     public function create()
     {
-        return view('dashboard.lessons.comments.create');
+        return view('dashboard.properties.comments.create');
     }
 
     public function store(Request $request)

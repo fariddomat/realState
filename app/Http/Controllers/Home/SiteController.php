@@ -97,18 +97,12 @@ class SiteController extends Controller
 
     public function sendContact(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string|max:1000',
-        ]);
-
         $contact = new Contact();
         $contact->name = $request->name;
         $contact->email = $request->email;
-        $contact->message = $request->message;
+        $contact->message = $request->messag;
         $contact->save();
 
-        return redirect()->route('contact')->with('success', 'Message sent successfully');
+        return redirect()->route('home')->with('success', 'Message sent successfully');
     }
 }

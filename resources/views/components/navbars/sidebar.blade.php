@@ -98,6 +98,18 @@
                 </a>
             </li>
             @endif
+            @if (auth()->user()->hasRole('user'))
+
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Route::currentRouteName() == 'dashboard.orders.user' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('dashboard.orders.user') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">book</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Orders</span>
+                </a>
+            </li>
+            @endif
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('moderator') || auth()->user()->hasRole('owner'))
 
             <li class="nav-item">

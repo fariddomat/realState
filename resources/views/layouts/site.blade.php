@@ -46,7 +46,7 @@
           <li><a class="item-active" href="{{ route('home') }}">الرئيسية</a></li>
           <li><a href="{{ route('categories') }}">العقارات</a></li>
           <li><a href="#team">من نحن ؟</a></li>
-          <li><a href="#contact">تواصل معنا </a></li>
+          <li><a href="{{ route('contact') }}">تواصل معنا </a></li>
         </ul>
         <div class="account">
           <a href="{{ route('login') }}">
