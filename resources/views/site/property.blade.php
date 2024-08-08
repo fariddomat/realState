@@ -84,11 +84,11 @@
 <main>
     <div>
         <ul class="breadcrumb">
-            <li><a href="#">للبيع</a></li>
+            <li><a href="#">{{ $property->type }}</a></li>
             <li><a href="#">منزل</a></li>
             <li><a href="#">{{ $property->address }}</a></li>
             <li class="slash"><a href="#">{{ $property->direction }}</a></li>
-            <li class="slash"><a href="#">سجل عقاري</a></li>
+            <li class="slash"><a href="#">{{ $property->name }}</a></li>
         </ul>
     </div>
 

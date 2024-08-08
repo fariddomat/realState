@@ -15,7 +15,7 @@
         <div class="stats flex">
             <div>
                 <i class="fa-solid fa-plus"></i>
-                <span class="counter" data-target="300">0</span>
+                <span class="counter" data-target="{{ $totalClients }}">0</span>
                 <div class="flex">
                     <p>عميل</p>
                     <p>سعيد</p>
@@ -23,7 +23,7 @@
             </div>
             <div>
                 <i class="fa-solid fa-plus"></i>
-                <span class="counter" data-target="260">0</span>
+                <span class="counter" data-target="{{ $totalProperties }}">0</span>
                 <div class="flex">
                     <p>عقار</p>
                     <p>مميز</p>
@@ -31,7 +31,7 @@
             </div>
             <div>
                 <i class="fa-solid fa-plus"></i>
-                <span class="counter" data-target="10">0</span>
+                <span class="counter" data-target="{{ $totalOwners }}">0</span>
                 <div class="flex">
                     <p>وكيل</p>
                 </div>
@@ -123,11 +123,10 @@
                 <div class="swiper-wrapper">
                     @foreach($properties as $property)
                     <div class="swiper-slide">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-img">
                                 <img src="{{ asset($property->img) }}" alt="Two-storey house" />
-                                <i class="fa-regular fa-heart heart-icon"></i>
-                                <span>{{ $property->status }}</span>
+                                <span>{{ $property->type }}</span>
                             </div>
                             <div class="card-content">
                                 <p>{{ $property->price }} ل.س</p>

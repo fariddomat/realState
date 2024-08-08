@@ -8,19 +8,19 @@
     <div class="boxes" style="padding-top: 35px; padding-bottom: 75px">
         @foreach ($properties as $property)
             <div class="box">
-                <img src="{{ asset($property->img) }}" alt="{{ $property->name }}" />
+                <div class="card" style="width: 100% !important;">
+                <div class="card-img">
+                    <img src="{{ asset($property->img) }}" alt="Two-storey house" />
+                    <span>{{ $property->type }}</span>
+                </div>
+
+                </div>
                 <div class="text_info">
                     <h3><i class="fas fa-home"></i>{{ $property->name }}</h3>
                     <p>{{ $property->description }}</p>
                 </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price">{{ $property->price }}$</div>
+
+                <div class="price">{{ $property->price }} ل.س</div>
                 <div class="text_info" style="text-align: center">
                     <a href="{{ route('property', $property) }}"
                         style="margin: 0 10px 20px;
