@@ -41,35 +41,47 @@
     <div class="hero-img">
         <img src="{{ asset('home/assets/images/2.png') }}" alt="house" />
     </div>
+
     <div class="bar">
-        <ul class="bar-list flex">
-            <li>الجميع</li>
-            <li class="active">للبيع</li>
-            <li>للآجار</li>
-        </ul>
-        <div class="bar-inputs flex">
-            <div class="input-wrapper">
-                <input type="text" placeholder="جميع المناطق" />
-                <div class="control">
-                    <i class="fa-solid fa-chevron-up"></i>
-                    <i class="fa-solid fa-chevron-down"></i>
+        <form action="{{ route('search') }}" method="GET" class="bar-list flex">
+            <ul class="bar-list flex">
+                <li>
+                    <input type="radio" name="type" value="all" checked> الجميع
+                </li>
+                <li>
+                    <input type="radio" name="type" value="بيع"> للبيع
+                </li>
+                <li>
+                    <input type="radio" name="type" value="آجار"> للآجار
+                </li>
+            </ul>
+            <div class="bar-inputs flex">
+                <div class="input-wrapper">
+                    <input type="text" name="location" placeholder="جميع المناطق" />
+                    <div class="control">
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="input-wrapper">
-                <input class="wdth" type="text" placeholder=" النوع" />
-                <div class="control">
-                    <i class="fa-solid fa-chevron-down"></i>
+                <div class="input-wrapper">
+                    <select name="category"  id="" style="height: 100%; padding-right: 10px;">
+                        <option value="">كل الأنواع</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
-            <div class="input-wrapper">
-                <input class="wdth" type="text" placeholder=" عدد الغرف" />
-                <div class="control">
-                    <i class="fa-solid fa-chevron-down"></i>
+                <div class="input-wrapper">
+                    <input class="wdth" type="number" name="rooms" placeholder="عدد الغرف" />
+                    <div class="control">
+
+                    </div>
                 </div>
+                <button type="submit" class="search-btn">بحث</button>
             </div>
-            <button class="search-btn">بحث</button>
-        </div>
+        </form>
     </div>
+
 </div>
 <!-- start of main -->
 <main class="bg">

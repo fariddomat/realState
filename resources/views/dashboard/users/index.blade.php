@@ -121,7 +121,11 @@
                                                     <div class="d-flex px-2 py-1">
 
                                                         <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                                            <h6 class="mb-0 text-sm">{{ $user->name }}
+                                                                @if ($user->status != 'active')
+                                                                <span style="color: red">(inActive)</span>
+                                                                @endif
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                 </td>

@@ -80,6 +80,7 @@ form h2::before{
 form h2::after{
     right: 158px;
 }
+.name,
 .email,
 .password{
     margin: 40px 60px;

@@ -58,6 +58,17 @@
 
 
                         <div class="mb-3 col-md-6">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-control border border-2 p-2">
+                                <option value="active">Active</option>
+                                <option value="inActive">inActive</option>
+                            </select>
+                            @error('status')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
                             <label for="role">Role</label>
                             <select name="role" id="role" class="form-control border border-2 p-2">
                                 <option value="">Select Role</option>

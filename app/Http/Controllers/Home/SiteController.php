@@ -17,7 +17,7 @@ class SiteController extends Controller
     public function home()
     {
         $categories = Category::all();
-        $properties = Property::latest()->take(6)->get(); // Example: show latest 6 properties
+        $properties = Property::where('status','available')->latest()->take(6)->get(); // Example: show latest 6 properties
         $owners=User::Role('owner')->get();
         return view('site.home', compact('categories', 'properties', 'owners'));
     }
@@ -30,7 +30,7 @@ class SiteController extends Controller
 
     public function properties(Category $category)
     {
-        $properties = $category->properties()->paginate(10);
+        $properties = $category->properties()->where('status','available')->paginate(10);
         return view('site.properties', compact('category', 'properties'));
     }
 
@@ -104,5 +104,32 @@ class SiteController extends Controller
         $contact->save();
 
         return redirect()->route('home')->with('success', 'Message sent successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $query = Property::query();
+
+        if ($request->filled('type') && $request->type !== 'all') {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->filled('location')) {
+            $query->where('address', 'like', '%' . $request->location . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->category . '%');
+            });
+        }
+
+        if ($request->filled('rooms')) {
+            $query->where('rooms', $request->rooms);
+        }
+
+        $properties = $query->where('status','available')->paginate(5);
+
+        return view('site.properties', compact('properties'));
     }
 }

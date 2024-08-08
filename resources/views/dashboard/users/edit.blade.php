@@ -51,6 +51,18 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-control border border-2 p-2">
+                                <option value="active">Active</option>
+                                <option value="inActive" @if ($user->status =='inActive')
+                                    selected
+                                @endif>inActive</option>
+                            </select>
+                            @error('status')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
 
 
 

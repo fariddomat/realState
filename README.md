@@ -31,8 +31,17 @@ Order
     view #
     user #
 
+Comment  
+    controller #
+    model #
+    view #
+
+
+
 site.blade.php
-home search
+
+home 
+    search #
     properties #
     owners #
 
@@ -47,3 +56,12 @@ property
     order #
 
 contact #
+
+
+check preivelgies #
+add images
+statistics
+approve accounts # and properties #
+manage website info
+profiles
+

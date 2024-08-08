@@ -88,9 +88,14 @@
                         <div class="mb-3 col-md-6">
                             <label for="user_id">User</label>
                             <select name="user_id" class="form-control border border-2 p-2">
+                                @if (auth()->user()->hasRole('owner'))
+                                <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
+                                @else
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"{{ old('user_id') == $user->id ? ' selected' : '' }}>{{ $user->name }}</option>
                                 @endforeach
+
+                                @endif
                             </select>
                         </div>
 

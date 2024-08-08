@@ -58,7 +58,9 @@
 
                                                 <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                name</th>
+                                                name
+
+                                            </th>
 
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
@@ -80,7 +82,11 @@
                                                     <div class="d-flex px-2 py-1">
 
                                                         <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-capitalize">{{ $property->name }}</h6>
+                                                            <h6 class="mb-0 text-capitalize">{{ $property->name }}
+                                                                @if ($property->status == 'pending')
+                                                                <span style="color: gold">(بانتظار الموافقة)</span>
+                                                            @endif
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                 </td>

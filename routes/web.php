@@ -38,13 +38,13 @@ Route::get('/categories/{category}', [SiteController::class, 'properties'])->nam
 Route::get('/property/{property}', [SiteController::class, 'property'])->name('property');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/contact', [SiteController::class, 'sendContact'])->name('sendContact');
-
+Route::get('/search', [SiteController::class, 'search'])->name('search');
 
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 
 
 // Ensure that the user is authenticated for these routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'checkStatus'])->group(function () {
 
 
 
@@ -56,14 +56,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/property/{property}/comment', [SiteController::class, 'comment'])->name('comment');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'checkStatus')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/updateInfo', [ProfileController::class, 'updateInfo'])->name('profile.updateInfo');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['auth', 'checkStatus'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::delete('favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
     Route::get('/orders/user', [OrderController::class, 'indexUser'])->name('orders.user');
@@ -80,7 +80,7 @@ Route::middleware(['role:admin'])->prefix('dashboard')->name('dashboard.')->grou
     Route::get('/contact', [Dashboard\HomeController::class, 'contact'])->name('contact');
 });
 // owner
-Route::middleware(['role:admin||moderator|owner'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['role:admin||moderator|owner' , 'checkStatus'])->prefix('dashboard')->name('dashboard.')->group(function () {
     // Routes accessible to admins and coach
 
     Route::resource('properties', Dashboard\PropertyController::class);
@@ -99,7 +99,7 @@ Route::middleware(['role:admin||moderator|owner'])->prefix('dashboard')->name('d
     Route::post('/imageGallery/uploader', [Dashboard\ImageGalleryController::class, 'uploader'])->name('imageGallery.uploader');
 });
 
-Route::middleware(['role:admin||moderator'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['role:admin||moderator' , 'checkStatus'])->prefix('dashboard')->name('dashboard.')->group(function () {
     // Routes accessible to admins and coach
 
     Route::resource('categories', Dashboard\CategoryController::class);
@@ -109,7 +109,7 @@ Route::middleware(['role:admin||moderator'])->prefix('dashboard')->name('dashboa
     Route::post('/imageGallery/uploader', [Dashboard\ImageGalleryController::class, 'uploader'])->name('imageGallery.uploader');
 });
 
-Route::middleware(['auth'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['auth' , 'checkStatus'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 
     // suggestion

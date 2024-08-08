@@ -16,7 +16,14 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->hasRole('owner')) {
+        $properties = auth()->user()->properties;
+
+        }
+        else{
         $properties = Property::latest()->get();
+
+        }
 
 
         return view('dashboard.properties.index', compact('properties'));
