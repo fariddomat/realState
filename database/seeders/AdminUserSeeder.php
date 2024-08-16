@@ -15,7 +15,7 @@ class AdminUserSeeder extends Seeder
     {
         $user = User::create([
             'name' => 'Admin',
-            'email' => 'admin@realestate.com',
+            'email' => 'admin@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -23,7 +23,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'moderator',
-            'email' => 'moderator@realestate.com',
+            'email' => 'moderator@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -31,7 +31,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'owner',
-            'email' => 'owner@realestate.com',
+            'email' => 'owner@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -40,7 +40,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'user',
-            'email' => 'user@realestate.com',
+            'email' => 'user@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -48,7 +48,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'owner2',
-            'email' => 'owner2@realestate.com',
+            'email' => 'owner2@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -56,7 +56,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'owner3',
-            'email' => 'owner3@realestate.com',
+            'email' => 'owner3@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);
@@ -64,7 +64,7 @@ class AdminUserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'owner4',
-            'email' => 'owner4@realestate.com',
+            'email' => 'owner4@realstate.com',
             'password' => bcrypt('password'), // Replace with a secure password
             // ... other user attributes ...
         ]);

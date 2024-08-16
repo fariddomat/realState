@@ -2,6 +2,14 @@
 
 Users
     controller #
+        index *
+        create *
+        store
+        show *
+        edit *
+        update
+        destroy
+
     model #
     view #
 

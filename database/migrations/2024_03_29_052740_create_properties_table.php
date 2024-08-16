@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('rooms');
             $table->string('direction');
             $table->string('address');
-            $table->string('status');
+            $table->string('status'); // pending
             $table->string('type'); // آجار، شراء
             $table->integer('user_id');
             $table->integer('category_id');

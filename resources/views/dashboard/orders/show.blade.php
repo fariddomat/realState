@@ -35,11 +35,11 @@
 
                                     <tr>
                                         <th>العقار:</th>
-                                        <td>{{ $order->property->name }}</td>
+                                        <td>{{ $order->property?->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>المستخدم:</th>
-                                        <td>{{ $order->user->name }}</td>
+                                        <td>{{ $order->user?->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>الرسالة:</th>

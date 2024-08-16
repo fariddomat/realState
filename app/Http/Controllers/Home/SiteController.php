@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public function home()
+    public function home() 
     {
         $categories = Category::all();
         $properties = Property::where('status','available')->latest()->take(6)->get(); // Example: show latest 6 properties
